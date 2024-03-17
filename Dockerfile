@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir --upgrade pip &&  \
     pip install psycopg2-binary==2.9.9 && \
     pip install configparser==6.0.0
 
-COPY web.conf /srv/app/conf/web.conf
+COPY ./web.conf /srv/app/conf/web.conf
 COPY web.py .
 
 ENTRYPOINT ["python3", "web.py"]

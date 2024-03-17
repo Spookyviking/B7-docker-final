@@ -12,7 +12,7 @@ def get_db_config(db_option):
         config.read('/srv/app/conf/web.conf')
         try:
                 result = config.get("database", db_option)
-        except configparser.NoSectionError:
+        except ConfigParser.NoSectionError:
                 print ('Cannot get {}. There is no such section or config file is unavailable/does not exist').format(db_option)
                 exit ()
         return result

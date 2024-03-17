@@ -1,6 +1,6 @@
 from psycopg2 import connect
 from flask import Flask
-from configparser import ConfigParser, NoSectionError
+from configparser import ConfigParser
 
 
 app = Flask(__name__)

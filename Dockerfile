@@ -1,16 +1,17 @@
-FROM python:3.11-slim as base
+FROM python:3.10-alpine
 
-RUN mkdir /srv/app
-VOLUME [ "/srv/app" ]
-RUN apt update && apt install -y libpq-dev && python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY web.py /srv/app/web.py
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-FROM python:3.11-slim
+WORKDIR /srv/app/
+RUN mkdir "conf"
 
-COPY --from=base /opt/venv /opt/venv
-COPY --from=base /srv/app /srv/app
-ENV PATH="/opt/venv/bin:$PATH"
-CMD python /srv/app/web.py
+RUN pip install --no-cache-dir --upgrade pip &&  \
+    pip install flask==3.0.0 && \
+    pip install psycopg2-binary==2.9.9 && \
+    pip install configparser==6.0.0
+
+COPY web.conf /srv/app/conf/web.conf
+COPY web.py .
+
+ENTRYPOINT ["python3", "web.py"]

@@ -22,6 +22,5 @@
 
 Затем запустить Docker-контейнер, смонтировав /srv/app с хостовой ФС в контейнерную, а также пробросив порт 80 из контейнера в хостовую сеть.
 
-docker build . -t flaskapp-img
-
-docker run -d --name flaskapp-app -p 80:5000 flaskapp-img
+`docker build . -t flaskapp-img`
+`docker run -d --name flaskapp-app -p 80:5000 flaskapp-img`
